@@ -6,16 +6,18 @@ int main() {
     int num, number;
     srand(time(0));
     number=rand()%100+1;
-    cout<<"Guess the number(1-100)"<<endl;
-    cin>>num;
-    if(num>number){
+     do{
+      cout<<"Guess the number(1-100)"<<endl;
+      cin>>num;
+      if(num>number){
       cout<<"Number is too large"<<endl;
-  }
+      }
     else if(num<number){
       cout<<"Number is too small"<<endl;
-  }
+      }
     else{
       cout<<"You guessed the number correct "<<endl;
-  }
+      }
+      }while(num!=number);
   return 0;
 }
