@@ -1,0 +1,54 @@
+// AI chatbot
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+// Simple rule-based intent recognition
+std::string getIntent(const std::string& userInput) {
+    std::transform(userInput.begin(), userInput.end(), userInput.begin(), ::tolower);
+
+    if (userInput.find("hello") != std::string::npos || userInput.find("hi") != std::string::npos)
+        return "GREET";
+    else if (userInput.find("how are you") != std::string::npos)
+        return "FEELING";
+    else if (userInput.find("question") != std::string::npos)
+        return "QUESTION";
+    else
+        return "UNKNOWN";
+}
+
+// Simple rule-based question answering
+std::string answerQuestion(const std::string& question) {
+    if (question.find("what is your name") != std::string::npos)
+        return "I am an AI chatbot.";
+    else if (question.find("how does sentiment analysis work") != std::string::npos)
+        return "Sentiment analysis involves determining the emotional tone behind a piece of text.";
+    else
+        return "I don't know the answer to that question.";
+}
+
+int main() {
+    std::string userInput;
+
+    while (true) {
+        std::cout << "User: ";
+        std::getline(std::cin, userInput);
+
+        // Intent recognition
+        std::string intent = getIntent(userInput);
+
+        // Dialogue management
+        if (intent == "GREET")
+            std::cout << "Bot: Hello!\n";
+        else if (intent == "FEELING")
+            std::cout << "Bot: I'm just a computer program, so I don't have feelings.\n";
+        else if (intent == "QUESTION") {
+            // Answering questions
+            std::string answer = answerQuestion(userInput);
+            std::cout << "Bot: " << answer << "\n";
+        } else
+            std::cout << "Bot: I'm sorry, I didn't understand that.\n";
+    }
+
+    return 0;
+}
